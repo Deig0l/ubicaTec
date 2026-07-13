@@ -8,6 +8,11 @@
 
     <link rel="icon" href="{{ asset('images/locations/logo_itcj.png') }}">
 
+    {{-- Precarga de recursos del mapa --}}
+    <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preload" href="/geo/piso0.json" as="fetch" crossorigin>
+
     {{-- Leaflet 1.9.4 (CDN, igual que el legacy) --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />

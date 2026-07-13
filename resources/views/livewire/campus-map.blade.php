@@ -49,6 +49,21 @@
     <div class="relative min-h-0 flex-1">
         <div id="ubicatec-map" class="absolute inset-0"></div>
 
+        {{-- Overlay de carga --}}
+        <div id="ubicatec-map-loading" class="pointer-events-none absolute inset-0 z-[950] flex items-center justify-center">
+            <span class="loading loading-spinner loading-lg text-primary"></span>
+        </div>
+
+        {{-- Botón "Mi ubicación" --}}
+        <button
+            type="button"
+            onclick="UbicaTecMap.locateMe()"
+            aria-label="Mostrar mi ubicación"
+            class="pointer-events-auto absolute bottom-24 right-4 z-[950] btn btn-circle btn-primary shadow-lg"
+        >
+            <x-mary-icon name="o-map-pin" class="w-6 h-6" />
+        </button>
+
         {{-- Selector de piso + bottom-sheet --}}
         <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[900] flex flex-col items-center {{ $location ? '' : 'pb-4 sm:pb-6' }}">
             <div class="join pointer-events-auto mb-2 shadow-lg">
@@ -208,21 +223,95 @@
             });
         }
 
-        window.UbicaTecMap = { setFloor: applyFloor };
+        function hideMapLoading() {
+            const el = document.getElementById('ubicatec-map-loading');
+            if (el) el.remove();
+        }
 
+        // --- Geolocalización del usuario ---
+        let userLocationMarker = null;
+        let userAccuracyCircle = null;
+
+        function showGeoToast(message) {
+            let toast = document.getElementById('ubicatec-geo-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'ubicatec-geo-toast';
+                toast.className = 'toast toast-center toast-bottom z-[1100]';
+                document.body.appendChild(toast);
+            }
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-warning shadow-lg';
+            alert.textContent = message;
+            toast.appendChild(alert);
+            setTimeout(function () { alert.remove(); }, 4000);
+        }
+
+        // Los listeners se registran una sola vez (dentro de este init único).
+        map.on('locationfound', function (e) {
+            if (userLocationMarker) {
+                userLocationMarker.setLatLng(e.latlng);
+            } else {
+                userLocationMarker = L.circleMarker(e.latlng, {
+                    radius: 8,
+                    color: '#ffffff',
+                    weight: 2,
+                    fillColor: '#2563eb',
+                    fillOpacity: 0.9,
+                }).addTo(map);
+            }
+
+            if (userAccuracyCircle) {
+                userAccuracyCircle.setLatLng(e.latlng).setRadius(e.accuracy);
+            } else {
+                userAccuracyCircle = L.circle(e.latlng, {
+                    radius: e.accuracy,
+                    color: '#2563eb',
+                    weight: 1,
+                    fillColor: '#2563eb',
+                    fillOpacity: 0.15,
+                }).addTo(map);
+            }
+
+            map.setView(e.latlng, 18);
+        });
+
+        map.on('locationerror', function () {
+            showGeoToast('No pudimos obtener tu ubicación. Revisa los permisos.');
+        });
+
+        function locateMe() {
+            map.locate({ enableHighAccuracy: true });
+        }
+
+        window.UbicaTecMap = { setFloor: applyFloor, locateMe: locateMe };
+
+        function paintFloor(floor, geojson) {
+            floorLayers[floor] = L.geoJSON(geojson, { style: styleFor, onEachFeature: onEachFeature });
+
+            if (floor === 0) {
+                // El exterior (piso 0) siempre está de base; se pinta apenas llega su json.
+                floorLayers[0].addTo(map);
+                hideMapLoading();
+            } else if (floor === currentFloor) {
+                // Un piso interior sólo se muestra si es el actualmente seleccionado.
+                floorLayers[floor].addTo(map);
+            }
+
+            // Mantener sincronizado el estado activo de los botones.
+            document.querySelectorAll('[data-floor-btn]').forEach(function (btn) {
+                btn.classList.toggle('btn-active', Number(btn.dataset.floorBtn) === currentFloor);
+            });
+        }
+
+        // Los 3 fetch corren en paralelo; cada capa se pinta apenas llega SU json.
         Promise.all(
             [0, 1, 2].map(function (floor) {
                 return fetch(payload.geo[floor])
                     .then(function (res) { return res.json(); })
-                    .then(function (geojson) {
-                        floorLayers[floor] = L.geoJSON(geojson, { style: styleFor, onEachFeature: onEachFeature });
-                    });
+                    .then(function (geojson) { paintFloor(floor, geojson); });
             })
         ).then(function () {
-            // El exterior (piso 0) siempre está de base.
-            floorLayers[0].addTo(map);
-            applyFloor(currentFloor);
-
             if (payload.location && payload.location.lat && payload.location.lng) {
                 L.marker([payload.location.lat, payload.location.lng]).addTo(map);
             }

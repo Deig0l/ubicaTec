@@ -1,4 +1,14 @@
 <div class="min-h-dvh flex flex-col items-center justify-center px-4 py-10 sm:py-16">
+    <button
+        type="button"
+        onclick="UbicaTecTheme.toggle()"
+        aria-label="Cambiar tema"
+        class="btn btn-circle btn-ghost fixed top-4 left-4 z-50 min-h-[44px] min-w-[44px]"
+    >
+        <x-mary-icon name="o-moon" class="w-6 h-6 icon-theme-moon" />
+        <x-mary-icon name="o-sun" class="w-6 h-6 icon-theme-sun" />
+    </button>
+
     <a
         href="{{ route('map') }}"
         class="btn btn-circle btn-ghost fixed top-4 right-4 z-50 min-h-[44px] min-w-[44px]"

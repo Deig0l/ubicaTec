@@ -1,14 +1,7 @@
 @import 'tailwindcss';
 
-@plugin 'daisyui';
-
-@plugin "daisyui/theme" {
-    name: "light";
-    default: true;
-    --color-primary: #800026;
-    --color-primary-content: #ffffff;
-    --color-secondary: #b9b9b9;
-    --radius-box: 0.75rem;
+@plugin 'daisyui' {
+    themes: light --default, dark --prefersdark;
 }
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -17,14 +10,39 @@
 @source '../../vendor/robsontenorio/mary/src/View/Components/**/*.php';
 @source '../../app/Livewire/**/*.php';
 
-/* Guinda institucional ITCJ — gana sobre el light de daisyUI */
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Guinda institucional ITCJ — gana sobre el light/dark de daisyUI (al final de las reglas de tema) */
 :root,
-[data-theme='light'] {
+[data-theme='light'],
+[data-theme='dark'] {
     --color-primary: #800026;
     --color-primary-content: #ffffff;
 }
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* Sistema en oscuro sin elección manual: guinda un paso más claro para mejor contraste */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-primary: #9d1c3e;
+        --color-primary-content: #ffffff;
+    }
+}
+
+/* Tema oscuro explícito: guinda un paso más claro sobre fondos oscuros */
+[data-theme='dark'] {
+    --color-primary: #9d1c3e;
+}
+
+/* Swap de íconos sol/luna según el tema activo */
+.icon-theme-sun {
+    display: none;
+}
+[data-theme='dark'] .icon-theme-sun {
+    display: inline-block;
+}
+[data-theme='dark'] .icon-theme-moon {
+    display: none;
 }

@@ -43,6 +43,16 @@
                 </div>
             @endif
         </div>
+
+        <button
+            type="button"
+            onclick="UbicaTecTheme.toggle()"
+            aria-label="Cambiar tema"
+            class="btn btn-circle btn-ghost btn-sm sm:btn-md shrink-0"
+        >
+            <x-mary-icon name="o-moon" class="w-5 h-5 icon-theme-moon" />
+            <x-mary-icon name="o-sun" class="w-5 h-5 icon-theme-sun" />
+        </button>
     </div>
 
     {{-- Área del mapa --}}

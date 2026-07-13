@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es-MX" data-theme="light">
+<html lang="es-MX">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
@@ -16,6 +16,27 @@
     {{-- Leaflet 1.9.4 (CDN, igual que el legacy) --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    {{-- Tema (anti-FOUC): fija data-theme antes de pintar --}}
+    <script>
+        (function () {
+            const stored = localStorage.getItem('ubicatec-theme');
+            const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', stored || system);
+            window.UbicaTecTheme = {
+                toggle() {
+                    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    localStorage.setItem('ubicatec-theme', next);
+                }
+            };
+            if (!stored) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    if (!localStorage.getItem('ubicatec-theme')) document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+                });
+            }
+        })();
+    </script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

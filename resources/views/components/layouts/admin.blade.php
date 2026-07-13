@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es-MX" data-theme="light">
+<html lang="es-MX">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
@@ -14,6 +14,27 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+    {{-- Tema (anti-FOUC): fija data-theme antes de pintar --}}
+    <script>
+        (function () {
+            const stored = localStorage.getItem('ubicatec-theme');
+            const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', stored || system);
+            window.UbicaTecTheme = {
+                toggle() {
+                    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    localStorage.setItem('ubicatec-theme', next);
+                }
+            };
+            if (!stored) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    if (!localStorage.getItem('ubicatec-theme')) document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+                });
+            }
+        })();
+    </script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-dvh bg-base-200 text-base-content antialiased">
@@ -27,6 +48,11 @@
         </div>
         <div class="flex-none flex items-center gap-2">
             <x-mary-button label="Ver sitio" icon="o-globe-alt" link="/" no-wire-navigate class="btn-ghost btn-sm" />
+
+            <button type="button" onclick="UbicaTecTheme.toggle()" aria-label="Cambiar tema" class="btn btn-circle btn-ghost btn-sm">
+                <x-mary-icon name="o-moon" class="w-5 h-5 icon-theme-moon" />
+                <x-mary-icon name="o-sun" class="w-5 h-5 icon-theme-sun" />
+            </button>
 
             @auth
                 <form method="POST" action="{{ route('logout') }}">

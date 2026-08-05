@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Category;
 use App\Models\Location;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -35,6 +36,9 @@ class LocationForm extends Component
 
     public int $kind = 0;
 
+    /** Nullable: puede quedar "Sin categoría" (cadena vacía desde el select). */
+    public $category_id = null;
+
     public ?float $lat = self::DEFAULT_LAT;
 
     public ?float $lng = self::DEFAULT_LNG;
@@ -61,6 +65,7 @@ class LocationForm extends Component
             $this->description = (string) $location->description;
             $this->floor = $location->floor;
             $this->kind = $location->kind;
+            $this->category_id = $location->category_id;
             $this->lat = $location->lat ?? self::DEFAULT_LAT;
             $this->lng = $location->lng ?? self::DEFAULT_LNG;
             $this->phone = (string) $location->phone;
@@ -119,6 +124,7 @@ class LocationForm extends Component
             'description' => ['nullable', 'string'],
             'floor' => ['required', 'integer', 'in:0,1,2'],
             'kind' => ['required', 'integer'],
+            'category_id' => ['nullable', 'integer', 'exists:categories,id'],
             'lat' => ['nullable', 'numeric', 'between:-90,90'],
             'lng' => ['nullable', 'numeric', 'between:-180,180'],
             'phone' => ['nullable', 'string', 'max:50'],
@@ -181,6 +187,11 @@ class LocationForm extends Component
 
     public function save(): void
     {
+        // El select "Sin categoría" envía cadena vacía: la normalizamos a null.
+        $this->category_id = ($this->category_id === '' || $this->category_id === null)
+            ? null
+            : (int) $this->category_id;
+
         $this->validate();
 
         $data = [
@@ -189,6 +200,7 @@ class LocationForm extends Component
             'description' => $this->description !== '' ? $this->description : null,
             'floor' => $this->floor,
             'kind' => $this->kind,
+            'category_id' => $this->category_id,
             'lat' => $this->lat,
             'lng' => $this->lng,
             'phone' => $this->phone !== '' ? $this->phone : null,
@@ -223,6 +235,7 @@ class LocationForm extends Component
         return view('livewire.admin.location-form', [
             'floorOptions' => $this->floorOptions(),
             'kindOptions' => $this->kindOptions(),
+            'categoryOptions' => Category::orderBy('name')->get(['id', 'name']),
         ]);
     }
 }

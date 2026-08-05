@@ -41,6 +41,17 @@
             {{ $this->floorLabel($location->floor) }}
         @endscope
 
+        @scope('cell_category', $location)
+            @if ($location->category)
+                <span class="badge badge-ghost gap-1">
+                    <span>{{ $location->category->icon }}</span>
+                    <span>{{ $location->category->name }}</span>
+                </span>
+            @else
+                <span class="text-base-content/30 text-xs">Sin categoría</span>
+            @endif
+        @endscope
+
         @scope('cell_synonyms', $location)
             <div class="flex flex-wrap gap-1 max-w-xs">
                 @forelse ($location->synonyms as $synonym)

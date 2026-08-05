@@ -209,6 +209,12 @@ class LocationSeeder extends Seeder
                 continue;
             }
 
+            // Los GeoJSON traen salones con solo el número ("126"); sin prefijo
+            // ensucian la búsqueda y los recientes.
+            if ($kind === 3 && preg_match('/^\d+$/', $name)) {
+                $name = 'Salón '.$name;
+            }
+
             if ($this->isDuplicateName($name)) {
                 continue;
             }

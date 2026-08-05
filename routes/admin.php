@@ -2,6 +2,7 @@
 
 // Rutas de auth y panel admin — propiedad del carril C (ver docs/superpowers/specs).
 
+use App\Livewire\Admin\CategoryList;
 use App\Livewire\Admin\LocationForm;
 use App\Livewire\Admin\LocationList;
 use App\Livewire\Auth\Login;
@@ -26,4 +27,5 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', LocationList::class)->name('admin.locations');
     Route::get('/locaciones/nueva', LocationForm::class)->name('admin.locations.create');
     Route::get('/locaciones/{location}/editar', LocationForm::class)->name('admin.locations.edit');
+    Route::get('/categorias', CategoryList::class)->name('admin.categories');
 });

@@ -7,7 +7,7 @@
         type="button"
         onclick="UbicaTecTheme.toggle()"
         aria-label="Cambiar tema"
-        class="btn btn-circle btn-ghost fixed top-4 left-4 z-50 min-h-[44px] min-w-[44px]"
+        class="btn btn-circle btn-ghost fixed top-4 right-4 z-50 min-h-[44px] min-w-[44px]"
     >
         <x-mary-icon name="o-moon" class="w-6 h-6 icon-theme-moon" />
         <x-mary-icon name="o-sun" class="w-6 h-6 icon-theme-sun" />
@@ -15,7 +15,7 @@
 
     <a
         href="{{ route('map') }}"
-        class="btn btn-circle btn-ghost fixed top-4 right-4 z-50 min-h-[44px] min-w-[44px]"
+        class="btn btn-circle btn-ghost fixed top-4 left-4 z-50 min-h-[44px] min-w-[44px]"
         aria-label="Cerrar y ver el mapa"
     >
         <x-mary-icon name="o-x-mark" class="w-6 h-6" />
@@ -130,6 +130,31 @@
                 @endforeach
             </div>
         </div>
+
+        {{-- Descubrir en el Tec --}}
+        @if ($this->categories->isNotEmpty())
+            <div class="w-full mt-6">
+                <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide opacity-60">
+                    Descubrir en el Tec
+                </h2>
+
+                <div class="flex flex-wrap gap-2">
+                    @foreach ($this->categories as $cat)
+                        <a
+                            href="{{ route('discover', $cat->slug) }}"
+                            wire:key="cat-{{ $cat->id }}"
+                            class="btn btn-outline gap-2 min-h-[44px] normal-case"
+                        >
+                            @if ($cat->icon)
+                                <span aria-hidden="true">{{ $cat->icon }}</span>
+                            @endif
+                            <span>{{ $cat->name }}</span>
+                            <span class="badge badge-sm badge-neutral">{{ $cat->locations_count }}</span>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
     </div>
 
     {{-- Feedback al navegar: "Llevándote a…" --}}

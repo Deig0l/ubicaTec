@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -17,6 +18,7 @@ class Location extends Model
         'description',
         'floor',
         'kind',
+        'category_id',
         'lat',
         'lng',
         'image',
@@ -33,6 +35,7 @@ class Location extends Model
         return [
             'floor' => 'integer',
             'kind' => 'integer',
+            'category_id' => 'integer',
             'lat' => 'float',
             'lng' => 'float',
             'search_count' => 'integer',
@@ -48,6 +51,16 @@ class Location extends Model
     public function synonyms(): HasMany
     {
         return $this->hasMany(LocationSynonym::class);
+    }
+
+    /**
+     * Categoría a la que pertenece esta locación.
+     *
+     * @return BelongsTo<Category, $this>
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**

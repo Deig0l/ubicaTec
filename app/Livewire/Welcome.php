@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Category;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
@@ -40,6 +41,19 @@ class Welcome extends Component
             ->where('is_searchable', true)
             ->orderByDesc('search_count')
             ->limit(3)
+            ->get();
+    }
+
+    /**
+     * Categorías con locaciones, para la sección "Descubrir en el Tec".
+     */
+    #[Computed]
+    public function categories(): Collection
+    {
+        return Category::query()
+            ->has('locations')
+            ->withCount('locations')
+            ->orderBy('name')
             ->get();
     }
 

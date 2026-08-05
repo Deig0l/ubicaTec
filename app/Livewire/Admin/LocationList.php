@@ -41,6 +41,7 @@ class LocationList extends Component
         return [
             ['key' => 'name', 'label' => 'Nombre', 'sortable' => true],
             ['key' => 'floor', 'label' => 'Piso', 'sortable' => false, 'class' => 'w-28'],
+            ['key' => 'category', 'label' => 'Categoría', 'sortable' => false, 'class' => 'w-40'],
             ['key' => 'synonyms', 'label' => 'Sinónimos', 'sortable' => false],
             ['key' => 'search_count', 'label' => 'Veces buscada', 'sortable' => true, 'class' => 'w-36'],
             ['key' => 'is_searchable', 'label' => 'Buscable', 'sortable' => false, 'class' => 'w-24'],
@@ -85,7 +86,7 @@ class LocationList extends Component
         $direction = ($this->sortBy['direction'] ?? 'desc') === 'asc' ? 'asc' : 'desc';
 
         return Location::query()
-            ->with('synonyms')
+            ->with('synonyms', 'category')
             ->when($this->search !== '', function ($query) {
                 $term = '%'.$this->search.'%';
 

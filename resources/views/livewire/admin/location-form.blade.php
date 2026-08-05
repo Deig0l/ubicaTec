@@ -23,6 +23,16 @@
                 <x-mary-select label="Tipo" wire:model="kind" :options="$kindOptions" />
             </div>
 
+            <x-mary-select
+                label="Categoría"
+                wire:model="category_id"
+                :options="$categoryOptions"
+                option-value="id"
+                option-label="name"
+                placeholder="Sin categoría"
+                icon="o-tag"
+            />
+
             <div class="grid grid-cols-2 gap-3">
                 <x-mary-input label="Teléfono" wire:model="phone" icon="o-phone" />
                 <x-mary-input label="Correo" wire:model="email" icon="o-envelope" />

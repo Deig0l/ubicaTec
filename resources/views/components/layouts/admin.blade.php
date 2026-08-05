@@ -47,6 +47,10 @@
             <span class="text-lg font-semibold">UbicaTec Admin</span>
         </div>
         <div class="flex-none flex items-center gap-2">
+            @auth
+                <x-mary-button label="Categorías" icon="o-tag" link="{{ route('admin.categories') }}" no-wire-navigate class="btn-ghost btn-sm" />
+            @endauth
+
             <x-mary-button label="Ver sitio" icon="o-globe-alt" link="/" no-wire-navigate class="btn-ghost btn-sm" />
 
             <button type="button" onclick="UbicaTecTheme.toggle()" aria-label="Cambiar tema" class="btn btn-circle btn-ghost btn-sm">

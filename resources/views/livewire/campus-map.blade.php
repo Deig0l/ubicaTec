@@ -281,7 +281,6 @@
         border: none !important;
         box-shadow: none !important;
         padding: 0 !important;
-        font-size: 9px;
         font-weight: 600;
         color: #1f2937;
         text-align: center;
@@ -291,9 +290,17 @@
     .ubicatec-polygon-label::before {
         display: none !important;
     }
-    .ubicatec-hide-labels .ubicatec-polygon-label {
-        display: none !important;
-    }
+    /* Dos niveles de etiqueta: edificios (piso 0) y salones (pisos 1-2).
+       La visibilidad/tamaño depende del bucket de zoom puesto en #ubicatec-map. */
+    .ubicatec-label-building { font-size: 11px; }
+    .ubicatec-label-room { font-size: 9px; }
+    .ubicatec-zoom-far .ubicatec-polygon-label { display: none !important; }
+    .ubicatec-zoom-mid .ubicatec-label-room { display: none !important; }
+    /* Viendo un piso interior, los nombres de edificio (exterior) estorban. */
+    .ubicatec-floor-interior .ubicatec-label-building { display: none !important; }
+    .ubicatec-zoom-close .ubicatec-label-room { font-size: 10px; }
+    .ubicatec-zoom-closest .ubicatec-label-room { font-size: 13px; }
+    .ubicatec-zoom-closest .ubicatec-label-building { font-size: 15px; }
 </style>
 
 <script>
@@ -313,10 +320,17 @@
             map.setView(payload.campusCenter, 17);
         }
 
-        // Ocultar etiquetas de polígonos cuando el zoom es bajo (mejor legibilidad).
+        // Etiquetas por zoom: lejos = nada, medio = solo edificios,
+        // cerca = aparecen salones, muy cerca = salones grandes.
         const mapEl = document.getElementById('ubicatec-map');
+        const ZOOM_BUCKETS = ['ubicatec-zoom-far', 'ubicatec-zoom-mid', 'ubicatec-zoom-close', 'ubicatec-zoom-closest'];
         function syncLabels() {
-            mapEl.classList.toggle('ubicatec-hide-labels', map.getZoom() < 18);
+            const z = map.getZoom();
+            const bucket = z < 16 ? 'ubicatec-zoom-far'
+                : z < 20 ? 'ubicatec-zoom-mid'
+                : z < 22 ? 'ubicatec-zoom-close'
+                : 'ubicatec-zoom-closest';
+            ZOOM_BUCKETS.forEach(function (c) { mapEl.classList.toggle(c, c === bucket); });
         }
         map.on('zoomend', syncLabels);
         syncLabels();
@@ -333,23 +347,28 @@
             };
         }
 
-        function onEachFeature(feature, layer) {
-            const name = feature?.properties?.name;
+        function onEachFeature(floor) {
+            return function (feature, layer) {
+                const name = feature?.properties?.name;
 
-            if (name) {
-                layer.bindTooltip(name, {
-                    permanent: true,
-                    direction: 'center',
-                    className: 'ubicatec-polygon-label',
-                });
-            }
+                if (name) {
+                    const tier = floor === 0 ? 'ubicatec-label-building' : 'ubicatec-label-room';
+                    layer.bindTooltip(name, {
+                        permanent: true,
+                        direction: 'center',
+                        className: 'ubicatec-polygon-label ' + tier,
+                    });
+                }
+            };
         }
 
         const floorLayers = {};
         let currentFloor = payload.location ? (payload.location.floor ?? 0) : 0;
+        mapEl.classList.toggle('ubicatec-floor-interior', currentFloor === 1 || currentFloor === 2);
 
         function applyFloor(floor) {
             currentFloor = floor;
+            mapEl.classList.toggle('ubicatec-floor-interior', floor === 1 || floor === 2);
 
             [1, 2].forEach(function (f) {
                 if (floorLayers[f] && map.hasLayer(floorLayers[f])) {
@@ -430,7 +449,7 @@
         window.UbicaTecMap = { setFloor: applyFloor, locateMe: locateMe };
 
         function paintFloor(floor, geojson) {
-            floorLayers[floor] = L.geoJSON(geojson, { style: styleFor, onEachFeature: onEachFeature });
+            floorLayers[floor] = L.geoJSON(geojson, { style: styleFor, onEachFeature: onEachFeature(floor) });
 
             if (floor === 0) {
                 // El exterior (piso 0) siempre está de base; se pinta apenas llega su json.

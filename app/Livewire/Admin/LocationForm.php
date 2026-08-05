@@ -132,7 +132,7 @@ class LocationForm extends Component
             'website' => ['nullable', 'url', 'max:255'],
             'facebook' => ['nullable', 'string', 'max:255'],
             'is_searchable' => ['boolean'],
-            'photo' => ['nullable', 'image', 'max:4096'],
+            'photo' => ['nullable', 'image', 'max:2048'],
             'synonyms' => ['array'],
             'synonyms.*' => ['string', 'max:255'],
         ];
@@ -211,8 +211,10 @@ class LocationForm extends Component
         ];
 
         if ($this->photo) {
+            // move() de Symfony no funciona con los temporales de Livewire
+            // (no pasan is_uploaded_file); hay que usar storeAs con un disco.
             $filename = Str::slug($this->name).'-'.now()->timestamp.'.'.$this->photo->extension();
-            $this->photo->move(public_path('images/locations'), $filename);
+            $this->photo->storeAs('', $filename, 'location_images');
             $data['image'] = 'images/locations/'.$filename;
         }
 

@@ -30,6 +30,13 @@ return [
 
     'disks' => [
 
+        // Fotos de locaciones subidas desde el admin (servidas directo desde public/).
+        'location_images' => [
+            'driver' => 'local',
+            'root' => public_path('images/locations'),
+            'throw' => true,
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),

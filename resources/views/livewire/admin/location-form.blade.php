@@ -53,7 +53,8 @@
             <x-mary-toggle label="Aparece en el buscador público" wire:model="is_searchable" right />
 
             <div>
-                <x-mary-file label="Fotografía" wire:model="photo" accept="image/*" hint="Máx. 4MB">
+                {{-- ponytail: 2 MB = upload_max_filesize de PHP; si subes el límite en php.ini, sube también rules() --}}
+                <x-mary-file label="Fotografía" wire:model="photo" accept="image/*" hint="Máx. 2MB">
                     @if ($photo)
                         <img src="{{ $photo->temporaryUrl() }}" class="h-24 w-24 object-cover rounded-box" />
                     @elseif ($location?->image)

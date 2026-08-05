@@ -44,11 +44,13 @@ class LocationSeeder extends Seeder
 
     private function seedAdmin(): void
     {
+        // En producción define UBICATEC_ADMIN_PASSWORD en .env; el valor por
+        // defecto solo es para desarrollo local.
         User::updateOrCreate(
             ['email' => 'admin@ubicatec.test'],
             [
                 'name' => 'Administrador UbicaTec',
-                'password' => Hash::make('ubicatec2026'),
+                'password' => Hash::make(env('UBICATEC_ADMIN_PASSWORD', 'ubicatec2026')),
                 'email_verified_at' => now(),
             ]
         );

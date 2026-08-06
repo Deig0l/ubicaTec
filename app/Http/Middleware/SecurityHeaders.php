@@ -17,7 +17,7 @@ class SecurityHeaders
         // los ORÍGENES permitidos (nada de scripts de dominios ajenos).
         $script = "'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com";
         $style = "'self' 'unsafe-inline' https://unpkg.com";
-        $connect = "'self'";
+        $connect = "'self' https://unpkg.com"; // unpkg: source maps de Leaflet (solo devtools)
 
         if (app()->environment('local')) {
             // Vite dev server (npm run dev) y su HMR por websocket.

@@ -59,6 +59,12 @@
                         <img src="{{ $photo->temporaryUrl() }}" class="h-24 w-24 object-cover rounded-box" />
                     @elseif ($location?->image)
                         <img src="{{ asset($location->image) }}" class="h-24 w-24 object-cover rounded-box" />
+                    @else
+                        {{-- Sin foto el slot quedaba vacío y mary ocultaba el input: no había nada que picar --}}
+                        <div class="h-24 w-40 rounded-box border-2 border-dashed border-base-300 flex flex-col items-center justify-center gap-1 text-base-content/60">
+                            <x-mary-icon name="o-photo" class="w-7 h-7" />
+                            <span class="text-xs">Subir foto</span>
+                        </div>
                     @endif
                 </x-mary-file>
             </div>

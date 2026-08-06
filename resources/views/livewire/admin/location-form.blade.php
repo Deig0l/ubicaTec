@@ -86,6 +86,8 @@
 
                         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             maxZoom: 20,
+                            maxNativeZoom: 19, // OSM solo sirve tiles hasta z19
+
                             attribution: '&copy; OpenStreetMap contributors',
                         }).addTo(map);
 

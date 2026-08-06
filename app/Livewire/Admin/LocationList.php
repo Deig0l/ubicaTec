@@ -19,6 +19,8 @@ class LocationList extends Component
 
     public string $search = '';
 
+    public string $building = '';
+
     public array $sortBy = ['column' => 'search_count', 'direction' => 'desc'];
 
     /**
@@ -27,6 +29,11 @@ class LocationList extends Component
     private const SORTABLE_COLUMNS = ['name', 'search_count'];
 
     public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    public function updatedBuilding(): void
     {
         $this->resetPage();
     }
@@ -40,6 +47,7 @@ class LocationList extends Component
     {
         return [
             ['key' => 'name', 'label' => 'Nombre', 'sortable' => true],
+            ['key' => 'building', 'label' => 'Edificio', 'sortable' => false, 'class' => 'w-44'],
             ['key' => 'floor', 'label' => 'Piso', 'sortable' => false, 'class' => 'w-28'],
             ['key' => 'category', 'label' => 'Categoría', 'sortable' => false, 'class' => 'w-40'],
             ['key' => 'synonyms', 'label' => 'Sinónimos', 'sortable' => false],
@@ -87,6 +95,7 @@ class LocationList extends Component
 
         return Location::query()
             ->with('synonyms', 'category')
+            ->when($this->building !== '', fn ($query) => $query->where('building', $this->building))
             ->when($this->search !== '', function ($query) {
                 $term = '%'.$this->search.'%';
 
@@ -108,6 +117,9 @@ class LocationList extends Component
             'locations' => $this->locations(),
             'total' => Location::count(),
             'top' => Location::orderByDesc('search_count')->limit(3)->get(),
+            'buildings' => Location::whereNotNull('building')->distinct()->orderBy('building')
+                ->pluck('building')
+                ->map(fn ($b) => ['id' => $b, 'name' => $b]),
         ]);
     }
 }

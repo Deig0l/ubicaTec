@@ -27,16 +27,35 @@
         @endforelse
     </div>
 
-    <div class="mb-4 max-w-sm">
-        <x-mary-input
-            wire:model.live.debounce.400ms="search"
-            placeholder="Buscar por nombre o sinónimo..."
-            icon="o-magnifying-glass"
-            clearable
-        />
+    <div class="mb-4 flex flex-col sm:flex-row gap-3">
+        <div class="max-w-sm flex-1">
+            <x-mary-input
+                wire:model.live.debounce.400ms="search"
+                placeholder="Buscar por nombre o sinónimo..."
+                icon="o-magnifying-glass"
+                clearable
+            />
+        </div>
+        <div class="max-w-xs flex-1">
+            <x-mary-select
+                wire:model.live="building"
+                :options="$buildings"
+                placeholder="Todos los edificios"
+                placeholder-value=""
+                icon="o-building-office"
+            />
+        </div>
     </div>
 
     <x-mary-table :headers="$headers" :rows="$locations" :sort-by="$sortBy" with-pagination striped>
+        @scope('cell_building', $location)
+            @if ($location->building)
+                {{ $location->building }}
+            @else
+                <span class="text-base-content/30 text-xs">—</span>
+            @endif
+        @endscope
+
         @scope('cell_floor', $location)
             {{ $this->floorLabel($location->floor) }}
         @endscope

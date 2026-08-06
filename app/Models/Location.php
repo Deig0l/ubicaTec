@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
@@ -88,10 +89,26 @@ class Location extends Model
     }
 
     /**
-     * Registra un acierto de búsqueda incrementando el contador.
+     * Registra un acierto de búsqueda: contador histórico + fila con timestamp
+     * para las estadísticas por hora/día/mes. Si vino de un término tecleado,
+     * también lo guarda ligado a esta locación.
      */
-    public function registerSearchHit(): void
+    public function registerSearchHit(?string $term = null): void
     {
+        // Anti-spam: 1 hit por IP+locación cada 10 min; repetir la misma búsqueda
+        // no infla las estadísticas. Trade-off: IPs compartidas (NAT) subcuentan.
+        $key = 'search-hit:'.request()->ip().':'.$this->id;
+
+        if (RateLimiter::tooManyAttempts($key, 1)) {
+            return;
+        }
+        RateLimiter::hit($key, 600);
+
         $this->increment('search_count');
+        SearchHit::create(['location_id' => $this->id, 'created_at' => now()]);
+
+        if ($term !== null) {
+            SearchTerm::log($term, $this->id);
+        }
     }
 }

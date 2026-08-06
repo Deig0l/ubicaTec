@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Location;
+use App\Models\SearchTerm;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -28,7 +29,13 @@ class Welcome extends Component
             return new Collection();
         }
 
-        return Location::search($term)->limit(8)->get();
+        $results = Location::search($term)->limit(8)->get();
+
+        if ($results->isEmpty()) {
+            SearchTerm::log($term, null); // búsqueda sin resultados: oro para sinónimos
+        }
+
+        return $results;
     }
 
     /**
@@ -63,7 +70,7 @@ class Welcome extends Component
     public function go(int $id)
     {
         $location = Location::findOrFail($id);
-        $location->registerSearchHit();
+        $location->registerSearchHit($this->search);
 
         return redirect()->route('map', $location->slug);
     }

@@ -65,7 +65,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // Hora local de Juárez: las estadísticas por hora del día dependen de esto.
+    'timezone' => 'America/Ciudad_Juarez',
 
     /*
     |--------------------------------------------------------------------------

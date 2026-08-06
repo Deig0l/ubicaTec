@@ -48,6 +48,7 @@
         </div>
         <div class="flex-none flex items-center gap-2">
             @auth
+                <x-mary-button label="Estadísticas" icon="o-chart-bar" link="{{ route('admin.stats') }}" no-wire-navigate class="btn-ghost btn-sm" />
                 <x-mary-button label="Categorías" icon="o-tag" link="{{ route('admin.categories') }}" no-wire-navigate class="btn-ghost btn-sm" />
             @endauth
 

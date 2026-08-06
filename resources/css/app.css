@@ -15,12 +15,26 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+/* Las clases dark: (p. ej. la paginación de Livewire) deben seguir el toggle de
+   daisyUI (data-theme), no el modo del sistema operativo. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
 /* Guinda institucional ITCJ — gana sobre el light/dark de daisyUI (al final de las reglas de tema) */
 :root,
 [data-theme='light'],
 [data-theme='dark'] {
     --color-primary: #800026;
     --color-primary-content: #ffffff;
+}
+
+/* Barras de las gráficas de estadísticas: guinda, y un paso más claro en oscuro
+   (validado ≥3:1 contra la superficie dark; el guinda puro da 2:1 ahí). */
+:root,
+[data-theme='light'] {
+    --ubicatec-chart-bar: #800026;
+}
+[data-theme='dark'] {
+    --ubicatec-chart-bar: #c2506b;
 }
 
 /* Sistema en oscuro sin elección manual: guinda un paso más claro para mejor contraste */

@@ -17,6 +17,7 @@ class Location extends Model
         'slug',
         'description',
         'floor',
+        'building',
         'kind',
         'category_id',
         'lat',

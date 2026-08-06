@@ -10,7 +10,7 @@ class SyncLocationsFromGeo extends Command
 {
     protected $signature = 'ubicatec:sync-locations {--dry : Solo mostrar qué se crearía}';
 
-    protected $description = 'Crea en la tabla locations los espacios del GeoJSON (piso0-2) que aún no existen; no toca los registros existentes.';
+    protected $description = 'Crea en la tabla locations los espacios del GeoJSON (piso0-2) que aún no existen; de los existentes solo rellena building cuando está vacío.';
 
     /** kind → category_id (Departamentos=1, Salones=3, Laboratorios=4, Comida=5, Deportes=6, Servicios=7). */
     private const KIND_CATEGORY = [
@@ -22,9 +22,6 @@ class SyncLocationsFromGeo extends Command
     /** Circulación que no debe aparecer en el buscador. */
     private const NOT_SEARCHABLE_KINDS = [2, 4, 10];
 
-    /** @var list<array{name: string, ring: list<list<float>>}> */
-    private array $buildings = [];
-
     /** Nombres ya usados (en minúsculas) — locations.name es UNIQUE. */
     private array $takenNames = [];
 
@@ -34,24 +31,18 @@ class SyncLocationsFromGeo extends Command
         $mLat = 110922.0;
         $mLng = 111320.0 * cos(deg2rad(31.719091));
 
-        $piso0 = json_decode(file_get_contents(public_path('geo/piso0.json')), true);
-        foreach ($piso0['features'] as $f) {
-            if (($f['properties']['kind'] ?? null) === 0) {
-                $this->buildings[] = ['name' => $f['properties']['name'], 'ring' => $f['geometry']['coordinates'][0]];
-            }
-        }
-
         $this->takenNames = Location::pluck('name')->map(fn ($n) => mb_strtolower($n))->flip()->all();
 
         $created = 0;
         $matched = 0;
         $omitted = 0;
+        $backfilled = 0;
 
         foreach ([0, 1, 2] as $floor) {
             $geo = json_decode(file_get_contents(public_path("geo/piso{$floor}.json")), true);
 
-            $existing = Location::where('floor', $floor)->get(['name', 'lat', 'lng'])
-                ->map(fn ($l) => ['key' => $this->normalize($l->name), 'lat' => $l->lat, 'lng' => $l->lng])
+            $existing = Location::where('floor', $floor)->get(['id', 'name', 'lat', 'lng', 'building'])
+                ->map(fn ($l) => ['id' => $l->id, 'key' => $this->normalize($l->name), 'lat' => $l->lat, 'lng' => $l->lng, 'building' => $l->building])
                 ->all();
 
             foreach ($geo['features'] as $f) {
@@ -60,23 +51,38 @@ class SyncLocationsFromGeo extends Command
                     continue;
                 }
                 $kind = (int) ($f['properties']['kind'] ?? 0);
+                $building = $f['properties']['building'] ?? null;
                 [$lng, $lat] = $this->centroid($f['geometry']['coordinates'][0]);
 
                 // Mismo nombre normalizado a menos de 60 m en el mismo piso = ya existe.
-                if ($this->near($existing, $this->normalize($name), $lat, $lng, 60.0, $mLat, $mLng)) {
+                $idx = $this->near($existing, $this->normalize($name), $lat, $lng, 60.0, $mLat, $mLng);
+                if ($idx !== null) {
                     $matched++;
+                    $match = $existing[$idx];
+                    if ($building !== null && $match['id'] !== null && $match['building'] === null) {
+                        $backfilled++;
+                        $existing[$idx]['building'] = $building; // el primer feature (el que creó el registro) manda
+                        if (! $dry) {
+                            Location::whereKey($match['id'])->update(['building' => $building]);
+                        }
+                    }
                     continue;
                 }
 
                 $base = preg_match('/^\d+$/', $name) ? "Salón {$name}" : $name;
-                $displayName = $this->resolveName($base, $lng, $lat);
+                $displayName = $this->resolveName($base, $building);
                 if ($displayName === null) {
                     $omitted++; // nombre y variante con edificio ya tomados: duplicado real
+                    // El registro "base (Edificio)" ya existe; su nombre trae el edificio, rellenar es inequívoco.
+                    if ($building !== null && ! $dry) {
+                        $backfilled += Location::where('name', "{$base} ({$building})")
+                            ->whereNull('building')->update(['building' => $building]);
+                    }
                     continue;
                 }
 
                 $created++;
-                $existing[] = ['key' => $this->normalize($base), 'lat' => $lat, 'lng' => $lng];
+                $existing[] = ['id' => null, 'key' => $this->normalize($base), 'lat' => $lat, 'lng' => $lng, 'building' => $building];
                 $this->takenNames[mb_strtolower($displayName)] = true;
 
                 if ($dry) {
@@ -88,6 +94,7 @@ class SyncLocationsFromGeo extends Command
                     'name' => $displayName,
                     'slug' => $this->uniqueSlug($displayName),
                     'floor' => $floor,
+                    'building' => $building,
                     'kind' => $kind,
                     'category_id' => self::KIND_CATEGORY[$kind] ?? null,
                     'lat' => round($lat, 7),
@@ -98,18 +105,17 @@ class SyncLocationsFromGeo extends Command
         }
 
         $verb = $dry ? 'se crearían' : 'creadas';
-        $this->info("Locaciones {$verb}: {$created} · ya existentes: {$matched} · duplicados omitidos: {$omitted}");
+        $this->info("Locaciones {$verb}: {$created} · ya existentes: {$matched} (building rellenado: {$backfilled}) · duplicados omitidos: {$omitted}");
 
         return self::SUCCESS;
     }
 
     /** Devuelve un nombre libre: el base, o "base (Edificio)", o null si ambos están tomados. */
-    private function resolveName(string $base, float $lng, float $lat): ?string
+    private function resolveName(string $base, ?string $building): ?string
     {
         if (! isset($this->takenNames[mb_strtolower($base)])) {
             return $base;
         }
-        $building = $this->buildingAt($lng, $lat);
         if ($building !== null) {
             $candidate = "{$base} ({$building})";
             if (! isset($this->takenNames[mb_strtolower($candidate)])) {
@@ -120,49 +126,26 @@ class SyncLocationsFromGeo extends Command
         return null;
     }
 
-    private function buildingAt(float $lng, float $lat): ?string
+    /**
+     * Devuelve el índice del pool que coincide (mismo nombre normalizado a menos de $radius m), o null.
+     *
+     * @param list<array{id: int|null, key: string, lat: float|null, lng: float|null, building: string|null}> $pool
+     */
+    private function near(array $pool, string $key, float $lat, float $lng, float $radius, float $mLat, float $mLng): ?int
     {
-        foreach ($this->buildings as $b) {
-            if ($this->pointInRing($lng, $lat, $b['ring'])) {
-                return $b['name'];
-            }
-        }
-
-        return null;
-    }
-
-    /** @param list<list<float>> $ring */
-    private function pointInRing(float $x, float $y, array $ring): bool
-    {
-        $inside = false;
-        $n = count($ring);
-        for ($i = 0, $j = $n - 1; $i < $n; $j = $i++) {
-            [$xi, $yi] = $ring[$i];
-            [$xj, $yj] = $ring[$j];
-            if (($yi > $y) !== ($yj > $y) && $x < ($xj - $xi) * ($y - $yi) / ($yj - $yi) + $xi) {
-                $inside = ! $inside;
-            }
-        }
-
-        return $inside;
-    }
-
-    /** @param list<array{key: string, lat: float|null, lng: float|null}> $pool */
-    private function near(array $pool, string $key, float $lat, float $lng, float $radius, float $mLat, float $mLng): bool
-    {
-        foreach ($pool as $p) {
+        foreach ($pool as $i => $p) {
             if ($p['key'] !== $key) {
                 continue;
             }
             if ($p['lat'] === null || $p['lng'] === null) {
-                return true; // mismo nombre sin pin: lo damos por existente
+                return $i; // mismo nombre sin pin: lo damos por existente
             }
             if (hypot(($p['lat'] - $lat) * $mLat, ($p['lng'] - $lng) * $mLng) <= $radius) {
-                return true;
+                return $i;
             }
         }
 
-        return false;
+        return null;
     }
 
     private function normalize(string $name): string

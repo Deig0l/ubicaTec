@@ -5,7 +5,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "202"
+    "name": "202",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -40,7 +41,8 @@
    "type": "Feature",
    "properties": {
     "name": "203",
-    "kind": 3
+    "kind": 3,
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -75,7 +77,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "204"
+    "name": "204",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -110,7 +113,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "205"
+    "name": "205",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -145,7 +149,8 @@
    "type": "Feature",
    "properties": {
     "name": "206",
-    "kind": 3
+    "kind": 3,
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -180,7 +185,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "207"
+    "name": "207",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -215,7 +221,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "208"
+    "name": "208",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -250,7 +257,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "212"
+    "name": "212",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -285,7 +293,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "213"
+    "name": "213",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -320,7 +329,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "217"
+    "name": "217",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -355,7 +365,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "218"
+    "name": "218",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -390,7 +401,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "219"
+    "name": "219",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -429,7 +441,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "220"
+    "name": "220",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -468,7 +481,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "221"
+    "name": "221",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -503,7 +517,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "222"
+    "name": "222",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -538,7 +553,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "223"
+    "name": "223",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -573,7 +589,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "224"
+    "name": "224",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -608,7 +625,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "225"
+    "name": "225",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -643,7 +661,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "226"
+    "name": "226",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -678,7 +697,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "228"
+    "name": "228",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -713,7 +733,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "229"
+    "name": "229",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -748,7 +769,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "230"
+    "name": "230",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -783,7 +805,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "231"
+    "name": "231",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -822,7 +845,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "232"
+    "name": "232",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -857,7 +881,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "233"
+    "name": "233",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -892,7 +917,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "234"
+    "name": "234",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -927,7 +953,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "235"
+    "name": "235",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -962,7 +989,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "236"
+    "name": "236",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -997,7 +1025,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "237"
+    "name": "237",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1032,7 +1061,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "238"
+    "name": "238",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1067,7 +1097,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "239"
+    "name": "239",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1102,7 +1133,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "240"
+    "name": "240",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1137,7 +1169,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Departamento Economico Administrativo"
+    "name": "Departamento Economico Administrativo",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1172,7 +1205,8 @@
    "type": "Feature",
    "properties": {
     "kind": 8,
-    "name": "Baño hombres"
+    "name": "Baño hombres",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1207,7 +1241,8 @@
    "type": "Feature",
    "properties": {
     "kind": 9,
-    "name": "Baños Mujeres"
+    "name": "Baños Mujeres",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1242,7 +1277,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escalera-1"
+    "name": "Escalera-1",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1277,7 +1313,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escalera-2"
+    "name": "Escalera-2",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1312,7 +1349,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escalera-3"
+    "name": "Escalera-3",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1347,7 +1385,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escalera-4"
+    "name": "Escalera-4",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1382,7 +1421,8 @@
    "type": "Feature",
    "properties": {
     "kind": 10,
-    "name": "Elevador"
+    "name": "Elevador",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1417,7 +1457,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Bodega"
+    "name": "Bodega",
+    "building": "Edificio Rivera Lara"
    },
    "geometry": {
     "coordinates": [
@@ -1452,7 +1493,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escaleras Sistemas"
+    "name": "Escaleras Sistemas",
+    "building": "Edificio Sistemas"
    },
    "geometry": {
     "coordinates": [
@@ -1487,7 +1529,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Oficinas maestros"
+    "name": "Oficinas maestros",
+    "building": "Edificio Sistemas"
    },
    "geometry": {
     "coordinates": [
@@ -1522,7 +1565,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "706"
+    "name": "706",
+    "building": "Edificio Sistemas"
    },
    "geometry": {
     "coordinates": [
@@ -1557,7 +1601,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Departamento Sistemas"
+    "name": "Departamento Sistemas",
+    "building": "Edificio Sistemas"
    },
    "geometry": {
     "coordinates": [
@@ -1592,7 +1637,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "707"
+    "name": "707",
+    "building": "Edificio Sistemas"
    },
    "geometry": {
     "coordinates": [
@@ -1631,7 +1677,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "705"
+    "name": "705",
+    "building": "Edificio Sistemas"
    },
    "geometry": {
     "coordinates": [
@@ -1666,7 +1713,8 @@
    "type": "Feature",
    "properties": {
     "kind": 9,
-    "name": "Baños maestras"
+    "name": "Baños maestras",
+    "building": "Edificio Sistemas"
    },
    "geometry": {
     "coordinates": [
@@ -1701,7 +1749,8 @@
    "type": "Feature",
    "properties": {
     "kind": 8,
-    "name": "Baños maestros"
+    "name": "Baños maestros",
+    "building": "Edificio Sistemas"
    },
    "geometry": {
     "coordinates": [
@@ -1752,7 +1801,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Oficinas maestros"
+    "name": "Oficinas maestros",
+    "building": "Edificio Sistemas"
    },
    "geometry": {
     "coordinates": [
@@ -1791,7 +1841,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Jefatura de laboratorio"
+    "name": "Jefatura de laboratorio",
+    "building": "Edificio Sistemas"
    },
    "geometry": {
     "coordinates": [
@@ -1826,7 +1877,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Departamento Extraescolares"
+    "name": "Departamento Extraescolares",
+    "building": "Gimnasio"
    },
    "geometry": {
     "coordinates": [
@@ -1861,7 +1913,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "Salon Gimnasio"
+    "name": "Salon Gimnasio",
+    "building": "Gimnasio"
    },
    "geometry": {
     "coordinates": [
@@ -1896,7 +1949,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Bodega 3"
+    "name": "Bodega 3",
+    "building": "Gimnasio"
    },
    "geometry": {
     "coordinates": [
@@ -1931,7 +1985,8 @@
    "type": "Feature",
    "properties": {
     "kind": 4,
-    "name": "Pasillo"
+    "name": "Pasillo",
+    "building": "Ciencias basicas"
    },
    "geometry": {
     "coordinates": [
@@ -1966,7 +2021,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escaleras"
+    "name": "Escaleras",
+    "building": "Ciencias basicas"
    },
    "geometry": {
     "coordinates": [
@@ -2001,7 +2057,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "301"
+    "name": "301",
+    "building": "Ciencias basicas"
    },
    "geometry": {
     "coordinates": [
@@ -2036,7 +2093,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "302"
+    "name": "302",
+    "building": "Ciencias basicas"
    },
    "geometry": {
     "coordinates": [
@@ -2071,7 +2129,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "303"
+    "name": "303",
+    "building": "Ciencias basicas"
    },
    "geometry": {
     "coordinates": [
@@ -2106,7 +2165,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "304"
+    "name": "304",
+    "building": "Ciencias basicas"
    },
    "geometry": {
     "coordinates": [
@@ -2141,7 +2201,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "305"
+    "name": "305",
+    "building": "Ciencias basicas"
    },
    "geometry": {
     "coordinates": [
@@ -2176,7 +2237,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "306"
+    "name": "306",
+    "building": "Ciencias basicas"
    },
    "geometry": {
     "coordinates": [
@@ -2211,7 +2273,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Sala de Juntas"
+    "name": "Sala de Juntas",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2245,7 +2308,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Almacén"
+    "name": "Almacén",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2279,7 +2343,8 @@
    "type": "Feature",
    "properties": {
     "kind": 8,
-    "name": "W.C. Hombres"
+    "name": "W.C. Hombres",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2313,7 +2378,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escaleras"
+    "name": "Escaleras",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2347,7 +2413,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Jefatura"
+    "name": "Jefatura",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2381,7 +2448,8 @@
    "type": "Feature",
    "properties": {
     "kind": 9,
-    "name": "W.C. Mujeres"
+    "name": "W.C. Mujeres",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2415,7 +2483,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Recursos Financieros"
+    "name": "Recursos Financieros",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2449,7 +2518,8 @@
    "type": "Feature",
    "properties": {
     "kind": 11,
-    "name": "Café"
+    "name": "Café",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2483,7 +2553,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Caja"
+    "name": "Caja",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2517,7 +2588,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Contabilidad y Presupuestos"
+    "name": "Contabilidad y Presupuestos",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2551,7 +2623,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Recepción de Dirección"
+    "name": "Recepción de Dirección",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2585,7 +2658,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Dirección"
+    "name": "Dirección",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2619,7 +2693,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Sala de Espera"
+    "name": "Sala de Espera",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2653,7 +2728,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Archivo"
+    "name": "Archivo",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2687,7 +2763,8 @@
    "type": "Feature",
    "properties": {
     "kind": 9,
-    "name": "W.C."
+    "name": "W.C.",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2721,7 +2798,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Recepción de Subdirecciones"
+    "name": "Recepción de Subdirecciones",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2755,7 +2833,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Subdirección de Planeación y Vinculación"
+    "name": "Subdirección de Planeación y Vinculación",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2793,7 +2872,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Subdirección Académica"
+    "name": "Subdirección Académica",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2827,7 +2907,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Subdirección Administrativa"
+    "name": "Subdirección Administrativa",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2861,7 +2942,8 @@
    "type": "Feature",
    "properties": {
     "kind": 11,
-    "name": "Papelería"
+    "name": "Papelería",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2895,7 +2977,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Archivo"
+    "name": "Archivo",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2929,7 +3012,8 @@
    "type": "Feature",
    "properties": {
     "kind": 9,
-    "name": "W.C."
+    "name": "W.C.",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2963,7 +3047,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Archivo"
+    "name": "Archivo",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -2997,7 +3082,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Planeación"
+    "name": "Planeación",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -3031,7 +3117,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Desarrollo Institucional"
+    "name": "Desarrollo Institucional",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -3065,7 +3152,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Construcción y Equipamiento"
+    "name": "Construcción y Equipamiento",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -3099,7 +3187,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Jefatura de Planeación"
+    "name": "Jefatura de Planeación",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -3133,7 +3222,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Programación y Evaluación Presupuestal"
+    "name": "Programación y Evaluación Presupuestal",
+    "building": "Edificio Administración"
    },
    "geometry": {
     "type": "Polygon",
@@ -3167,7 +3257,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Acervo de Libros"
+    "name": "Acervo de Libros",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3201,7 +3292,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "Cubículo para grupo 6 y 7"
+    "name": "Cubículo para grupo 6 y 7",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3235,7 +3327,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Acervo de Tesis"
+    "name": "Acervo de Tesis",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3269,7 +3362,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Acervo de Libros"
+    "name": "Acervo de Libros",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3303,7 +3397,8 @@
    "type": "Feature",
    "properties": {
     "kind": 10,
-    "name": "Elevador"
+    "name": "Elevador",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3337,7 +3432,8 @@
    "type": "Feature",
    "properties": {
     "kind": 13,
-    "name": "Área de Lectura"
+    "name": "Área de Lectura",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3371,7 +3467,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Módulo de Servicio"
+    "name": "Módulo de Servicio",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3405,7 +3502,8 @@
    "type": "Feature",
    "properties": {
     "kind": 13,
-    "name": "Área de Lectura"
+    "name": "Área de Lectura",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3439,7 +3537,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Módulo de Servicio"
+    "name": "Módulo de Servicio",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3473,7 +3572,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "Club de Ajedrez"
+    "name": "Club de Ajedrez",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3507,7 +3607,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "Cubículo para grupo 1 y 3"
+    "name": "Cubículo para grupo 1 y 3",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3541,7 +3642,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "Cubículo para grupo 3 y 4"
+    "name": "Cubículo para grupo 3 y 4",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3575,7 +3677,8 @@
    "type": "Feature",
    "properties": {
     "kind": 9,
-    "name": "S.S. Mujeres"
+    "name": "S.S. Mujeres",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3609,7 +3712,8 @@
    "type": "Feature",
    "properties": {
     "kind": 8,
-    "name": "S.S. Hombres"
+    "name": "S.S. Hombres",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3643,7 +3747,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Acervo de Libros"
+    "name": "Acervo de Libros",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3677,7 +3782,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Acervo de Libros"
+    "name": "Acervo de Libros",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3711,7 +3817,8 @@
    "type": "Feature",
    "properties": {
     "kind": 10,
-    "name": "Elevador de Libros"
+    "name": "Elevador de Libros",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3745,7 +3852,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escaleras"
+    "name": "Escaleras",
+    "building": "Centro de Información"
    },
    "geometry": {
     "type": "Polygon",
@@ -3779,7 +3887,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Equipo de Audio del ITCJ"
+    "name": "Equipo de Audio del ITCJ",
+    "building": "Aulas 400/Audiovisual"
    },
    "geometry": {
     "type": "Polygon",
@@ -3813,7 +3922,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escaleras"
+    "name": "Escaleras",
+    "building": "Aulas 400/Audiovisual"
    },
    "geometry": {
     "type": "Polygon",
@@ -3847,7 +3957,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "401"
+    "name": "401",
+    "building": "Aulas 400/Audiovisual"
    },
    "geometry": {
     "type": "Polygon",
@@ -3881,7 +3992,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "402"
+    "name": "402",
+    "building": "Aulas 400/Audiovisual"
    },
    "geometry": {
     "type": "Polygon",
@@ -3915,7 +4027,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "403"
+    "name": "403",
+    "building": "Aulas 400/Audiovisual"
    },
    "geometry": {
     "type": "Polygon",
@@ -3949,7 +4062,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "404"
+    "name": "404",
+    "building": "Aulas 400/Audiovisual"
    },
    "geometry": {
     "type": "Polygon",
@@ -3983,7 +4097,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "405"
+    "name": "405",
+    "building": "Aulas 400/Audiovisual"
    },
    "geometry": {
     "type": "Polygon",
@@ -4017,7 +4132,8 @@
    "type": "Feature",
    "properties": {
     "kind": 4,
-    "name": "Pasillo"
+    "name": "Pasillo",
+    "building": "Aulas 400/Audiovisual"
    },
    "geometry": {
     "type": "Polygon",
@@ -4055,7 +4171,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escaleras"
+    "name": "Escaleras",
+    "building": "Edificio Eléctrica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4089,7 +4206,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículo 6"
+    "name": "Cubículo 6",
+    "building": "Edificio Eléctrica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4123,7 +4241,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículo 7"
+    "name": "Cubículo 7",
+    "building": "Edificio Eléctrica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4157,7 +4276,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículo 8"
+    "name": "Cubículo 8",
+    "building": "Edificio Eléctrica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4191,7 +4311,8 @@
    "type": "Feature",
    "properties": {
     "kind": 12,
-    "name": "Lab. de Simulación (603)"
+    "name": "Lab. de Simulación (603)",
+    "building": "Edificio Eléctrica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4225,7 +4346,8 @@
    "type": "Feature",
    "properties": {
     "kind": 12,
-    "name": "Laboratorio de Instrumentación"
+    "name": "Laboratorio de Instrumentación",
+    "building": "Edificio Metal Mecánica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4259,7 +4381,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículo 7"
+    "name": "Cubículo 7",
+    "building": "Edificio Metal Mecánica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4293,7 +4416,8 @@
    "type": "Feature",
    "properties": {
     "kind": 12,
-    "name": "Laboratorio de los Materiales"
+    "name": "Laboratorio de los Materiales",
+    "building": "Edificio Metal Mecánica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4327,7 +4451,8 @@
    "type": "Feature",
    "properties": {
     "kind": 12,
-    "name": "Laboratorio de Ingeniería Térmica"
+    "name": "Laboratorio de Ingeniería Térmica",
+    "building": "Edificio Metal Mecánica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4361,7 +4486,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escaleras"
+    "name": "Escaleras",
+    "building": "Edificio Metal Mecánica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4395,7 +4521,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículo 6"
+    "name": "Cubículo 6",
+    "building": "Edificio Metal Mecánica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4429,7 +4556,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículo 8"
+    "name": "Cubículo 8",
+    "building": "Edificio Metal Mecánica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4463,7 +4591,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículo 9"
+    "name": "Cubículo 9",
+    "building": "Edificio Metal Mecánica"
    },
    "geometry": {
     "type": "Polygon",
@@ -4497,7 +4626,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "808"
+    "name": "808",
+    "building": "Edificio P - 800's"
    },
    "geometry": {
     "type": "Polygon",
@@ -4531,7 +4661,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículo"
+    "name": "Cubículo",
+    "building": "Edificio P - 800's"
    },
    "geometry": {
     "type": "Polygon",
@@ -4565,7 +4696,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "807"
+    "name": "807",
+    "building": "Edificio P - 800's"
    },
    "geometry": {
     "type": "Polygon",
@@ -4599,7 +4731,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escaleras"
+    "name": "Escaleras",
+    "building": "Edificio P - 800's"
    },
    "geometry": {
     "type": "Polygon",
@@ -4633,7 +4766,8 @@
    "type": "Feature",
    "properties": {
     "kind": 8,
-    "name": "W.C. Hombres"
+    "name": "W.C. Hombres",
+    "building": "Edificio P - 800's"
    },
    "geometry": {
     "type": "Polygon",
@@ -4667,7 +4801,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "805"
+    "name": "805",
+    "building": "Edificio P - 800's"
    },
    "geometry": {
     "type": "Polygon",
@@ -4705,7 +4840,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículo"
+    "name": "Cubículo",
+    "building": "Edificio P - 800's"
    },
    "geometry": {
     "type": "Polygon",
@@ -4739,7 +4875,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "806"
+    "name": "806",
+    "building": "Edificio P - 800's"
    },
    "geometry": {
     "type": "Polygon",
@@ -4773,7 +4910,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículo"
+    "name": "Cubículo",
+    "building": "Edificio T - Ingeniería Industrial"
    },
    "geometry": {
     "type": "Polygon",
@@ -4807,7 +4945,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Secretaría"
+    "name": "Secretaría",
+    "building": "Edificio T - Ingeniería Industrial"
    },
    "geometry": {
     "type": "Polygon",
@@ -4841,7 +4980,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escaleras"
+    "name": "Escaleras",
+    "building": "Edificio T - Ingeniería Industrial"
    },
    "geometry": {
     "type": "Polygon",
@@ -4875,7 +5015,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "Área Abierta"
+    "name": "Área Abierta",
+    "building": "Edificio T - Ingeniería Industrial"
    },
    "geometry": {
     "type": "Polygon",
@@ -4913,7 +5054,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "Área Abierta"
+    "name": "Área Abierta",
+    "building": "Edificio T - Ingeniería Industrial"
    },
    "geometry": {
     "type": "Polygon",
@@ -4947,7 +5089,8 @@
    "type": "Feature",
    "properties": {
     "kind": 12,
-    "name": "Lab. de Manufactura"
+    "name": "Lab. de Manufactura",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -4981,7 +5124,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "958"
+    "name": "958",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5015,7 +5159,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "959"
+    "name": "959",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5049,7 +5194,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "962"
+    "name": "962",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5083,7 +5229,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículos"
+    "name": "Cubículos",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5117,7 +5264,8 @@
    "type": "Feature",
    "properties": {
     "kind": 13,
-    "name": "Área de Estudio"
+    "name": "Área de Estudio",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5151,7 +5299,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículos de Maestros de Posgrado"
+    "name": "Cubículos de Maestros de Posgrado",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5189,7 +5338,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Cubículos"
+    "name": "Cubículos",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5231,7 +5381,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "957"
+    "name": "957",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5269,7 +5420,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "961"
+    "name": "961",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5303,7 +5455,8 @@
    "type": "Feature",
    "properties": {
     "kind": 3,
-    "name": "956"
+    "name": "956",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5341,7 +5494,8 @@
    "type": "Feature",
    "properties": {
     "kind": 8,
-    "name": "W.C. Hombres"
+    "name": "W.C. Hombres",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5383,7 +5537,8 @@
    "type": "Feature",
    "properties": {
     "kind": 9,
-    "name": "W.C. Mujeres"
+    "name": "W.C. Mujeres",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5425,7 +5580,8 @@
    "type": "Feature",
    "properties": {
     "kind": 13,
-    "name": "Área de Estar"
+    "name": "Área de Estar",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5459,7 +5615,8 @@
    "type": "Feature",
    "properties": {
     "kind": 2,
-    "name": "Escaleras"
+    "name": "Escaleras",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5493,7 +5650,8 @@
    "type": "Feature",
    "properties": {
     "kind": 14,
-    "name": "Bodega"
+    "name": "Bodega",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5527,7 +5685,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Sala de Juntas"
+    "name": "Sala de Juntas",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5561,7 +5720,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Área de Secretarias"
+    "name": "Área de Secretarias",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5595,7 +5755,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "C.M. Ing. Industrial"
+    "name": "C.M. Ing. Industrial",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5629,7 +5790,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "C.M. Administración"
+    "name": "C.M. Administración",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5667,7 +5829,8 @@
    "type": "Feature",
    "properties": {
     "kind": 9,
-    "name": "W.C. Mujeres"
+    "name": "W.C. Mujeres",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5701,7 +5864,8 @@
    "type": "Feature",
    "properties": {
     "kind": 8,
-    "name": "W.C. Hombres"
+    "name": "W.C. Hombres",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5735,7 +5899,8 @@
    "type": "Feature",
    "properties": {
     "kind": 11,
-    "name": "Café"
+    "name": "Café",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",
@@ -5769,7 +5934,8 @@
    "type": "Feature",
    "properties": {
     "kind": 6,
-    "name": "Jefatura"
+    "name": "Jefatura",
+    "building": "Edificio W - Posgrado"
    },
    "geometry": {
     "type": "Polygon",

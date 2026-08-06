@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Location;
 use App\Models\SearchTerm;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -84,9 +85,36 @@ class CampusMap extends Component
     }
 
     /**
-     * Payload serializable que el JS inline del blade consume vía @json().
+     * Clave de comparación edificio ↔ locación: sin acentos y en minúsculas,
+     * porque los `building` del GeoJSON no siempre traen los acentos del nombre real.
      */
-    protected function mapPayload(): array
+    private function buildingKey(string $name): string
+    {
+        return mb_strtolower(Str::ascii($name));
+    }
+
+    /**
+     * Espacios interiores (pisos 1-2) agrupados por su edificio normalizado.
+     *
+     * @return \Illuminate\Support\Collection<string, Collection<int, Location>>
+     */
+    private function interiorsByBuilding(): \Illuminate\Support\Collection
+    {
+        return Location::where('floor', '>', 0)
+            ->whereNotNull('building')
+            ->where('is_searchable', true)
+            ->orderBy('floor')
+            ->orderBy('name')
+            ->get(['name', 'slug', 'floor', 'building'])
+            ->groupBy(fn ($l) => $this->buildingKey($l->building));
+    }
+
+    /**
+     * Payload serializable que el JS inline del blade consume vía @json().
+     *
+     * @param  \Illuminate\Support\Collection  $interiors  resultado de interiorsByBuilding()
+     */
+    protected function mapPayload(\Illuminate\Support\Collection $interiors): array
     {
         return [
             'location' => $this->location ? [
@@ -107,6 +135,24 @@ class CampusMap extends Component
                 1 => asset('geo/piso1.json'),
                 2 => asset('geo/piso2.json'),
             ],
+            // Click en un polígono de piso 0 (edificio/cancha/estacionamiento) → sheet
+            // deslizante con su info, sin recargar. Empata por nombre exacto de la
+            // feature; si el nombre no existe en locations, no es clickeable.
+            'floor0Info' => Location::where('floor', 0)
+                ->get(['name', 'slug', 'description', 'image', 'phone', 'email', 'website', 'facebook'])
+                ->mapWithKeys(fn ($l) => [$l->name => [
+                    'name' => $l->name,
+                    'url' => route('map', $l->slug),
+                    'description' => $l->description,
+                    'image' => $l->image ? asset($l->image) : null,
+                    'phone' => $l->phone,
+                    'email' => $l->email,
+                    'website' => $l->website,
+                    'facebook' => $l->facebook,
+                    'spaces' => ($interiors[$this->buildingKey($l->name)] ?? collect())
+                        ->map(fn ($s) => ['name' => $s->name, 'floor' => $s->floor, 'url' => route('map', $s->slug)])
+                        ->values(),
+                ]]),
             'palette' => self::KIND_COLORS,
             'campusCenter' => self::CAMPUS_CENTER,
         ];
@@ -114,8 +160,13 @@ class CampusMap extends Component
 
     public function render()
     {
+        $interiors = $this->interiorsByBuilding();
+
         return view('livewire.campus-map', [
-            'mapPayload' => $this->mapPayload(),
+            'mapPayload' => $this->mapPayload($interiors),
+            'spaces' => $this->location
+                ? ($interiors[$this->buildingKey($this->location->name)] ?? collect())
+                : collect(),
         ]);
     }
 }

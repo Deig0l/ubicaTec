@@ -27,6 +27,13 @@
     --color-primary-content: #ffffff;
 }
 
+/* Panel lateral de información del mapa (desktop): entra deslizándose desde la derecha */
+@keyframes panel-lateral {
+    from {
+        transform: translateX(100%);
+    }
+}
+
 /* Barras de las gráficas de estadísticas: guinda, y un paso más claro en oscuro
    (validado ≥3:1 contra la superficie dark; el guinda puro da 2:1 ahí). */
 :root,

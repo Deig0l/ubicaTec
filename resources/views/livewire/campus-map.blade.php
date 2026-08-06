@@ -1,16 +1,30 @@
-<div class="flex flex-col bg-base-200" style="height:100vh; height:100dvh;" x-data="{ searchOpen: false, legendOpen: false, goingTo: null }">
+<div class="flex flex-col bg-base-200" style="height:100vh; height:100dvh;" x-data="{ searchOpen: false, legendOpen: false, floorsOpen: false, building: null, goingTo: null, infoOpen: @js((bool) $location) }"
+    x-on:ubicatec-building.window="floorsOpen = false; infoOpen = false">
     {{-- Barra superior fija --}}
     <div class="z-[1000] flex shrink-0 items-center justify-between gap-2 border-b border-base-300 bg-base-100 px-2 py-2 shadow-sm">
+        {{-- Flecha y toggle de tema solo en desktop: en cel el gesto de atrás basta
+             y la franja se dedica completa a la búsqueda. --}}
         <a
             href="{{ route('home') }}"
             aria-label="Volver al inicio"
-            class="btn btn-circle btn-ghost btn-sm sm:btn-md shrink-0"
+            class="btn btn-circle btn-ghost btn-sm sm:btn-md hidden shrink-0 lg:inline-flex"
         >
             <x-mary-icon name="o-arrow-left" class="w-5 h-5" />
         </a>
 
+        {{-- Píldora de búsqueda (solo móvil): abre el sheet de búsqueda --}}
+        <button
+            type="button"
+            @click="searchOpen = true"
+            class="flex h-10 min-w-0 flex-1 items-center gap-3 rounded-full border border-base-300 bg-base-100 px-4 lg:hidden"
+        >
+            <x-mary-icon name="o-magnifying-glass" class="h-5 w-5 shrink-0 opacity-60" />
+            <span class="truncate text-sm opacity-60">¿A dónde vamos a ir?</span>
+        </button>
+
         <div class="relative hidden min-w-0 flex-1 lg:block" wire:key="mapa-buscador">
             <x-mary-input
+                id="buscador-desktop"
                 wire:model.live.debounce.300ms="search"
                 placeholder="Buscar en el campus…"
                 icon="o-magnifying-glass"
@@ -49,7 +63,7 @@
             type="button"
             onclick="UbicaTecTheme.toggle()"
             aria-label="Cambiar tema"
-            class="btn btn-circle btn-ghost btn-sm sm:btn-md shrink-0"
+            class="btn btn-circle btn-ghost btn-sm sm:btn-md hidden shrink-0 lg:inline-flex"
         >
             <x-mary-icon name="o-moon" class="w-5 h-5 icon-theme-moon" />
             <x-mary-icon name="o-sun" class="w-5 h-5 icon-theme-sun" />
@@ -70,17 +84,19 @@
             type="button"
             onclick="UbicaTecMap.locateMe()"
             aria-label="Mostrar mi ubicación"
-            class="pointer-events-auto absolute bottom-40 right-4 z-[950] btn btn-circle btn-primary shadow-lg lg:bottom-24"
+            :class="(building || infoOpen) ? 'lg:right-[25rem]' : ''"
+            class="pointer-events-auto absolute bottom-40 right-4 z-[950] btn btn-circle btn-primary shadow-lg transition-[right] duration-300 lg:bottom-56"
         >
             <x-mary-icon name="o-map-pin" class="w-6 h-6" />
         </button>
 
-        {{-- Leyenda de colores (colapsable) --}}
+        {{-- Leyenda de colores (colapsable); en desktop vive en la columna derecha --}}
         <button
             type="button"
             @click="legendOpen = !legendOpen"
             aria-label="Mostrar leyenda de colores"
-            class="pointer-events-auto absolute bottom-40 left-4 z-[950] btn btn-circle bg-base-100 text-base-content shadow-lg lg:bottom-24"
+            :class="(building || infoOpen) ? 'lg:right-[25rem]' : 'lg:right-4'"
+            class="pointer-events-auto absolute bottom-40 left-4 z-[950] btn btn-circle bg-base-100 text-base-content shadow-lg transition-[right] duration-300 lg:left-auto lg:bottom-40"
         >
             <x-mary-icon name="o-list-bullet" class="h-6 w-6" />
         </button>
@@ -88,7 +104,8 @@
         <div
             x-show="legendOpen"
             x-cloak
-            class="pointer-events-auto absolute bottom-56 left-4 z-[950] max-h-64 w-48 overflow-y-auto rounded-box border border-base-300 bg-base-100 p-3 text-xs text-base-content shadow-xl lg:bottom-40"
+            :class="(building || infoOpen) ? 'lg:right-[29rem]' : 'lg:right-20'"
+            class="pointer-events-auto absolute bottom-56 left-4 z-[950] max-h-64 w-48 overflow-y-auto rounded-box border border-base-300 bg-base-100 p-3 text-xs text-base-content shadow-xl transition-[right] duration-300 lg:left-auto lg:bottom-40"
         >
             <p class="mb-2 font-semibold">Leyenda</p>
             <div class="grid gap-1.5">
@@ -107,60 +124,74 @@
             </div>
         </div>
 
-        {{-- Selector de piso + bottom-sheet --}}
-        <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[900] flex flex-col items-center lg:contents {{ $location ? '' : 'pb-4 sm:pb-6' }}">
-            {{-- Píldora de búsqueda en zona del pulgar (solo móvil) --}}
-            <button
-                type="button"
-                @click="searchOpen = true"
-                class="pointer-events-auto z-[900] mx-4 mb-3 flex h-12 items-center gap-3 self-stretch rounded-full border border-base-300 bg-base-100 px-5 shadow-lg lg:hidden"
-            >
-                <x-mary-icon name="o-magnifying-glass" class="h-5 w-5 shrink-0 opacity-60" />
-                <span class="text-sm opacity-60">¿A dónde vamos a ir?</span>
-            </button>
+        {{-- Botón de capas, al fondo de la columna derecha; en cel se oculta con el sheet abierto --}}
+        <button
+            type="button"
+            @click="floorsOpen = !floorsOpen"
+            aria-label="Elegir piso"
+            :class="(building ? 'hidden lg:inline-flex ' : '') + ((building || infoOpen) ? 'lg:right-[25rem]' : '')"
+            class="pointer-events-auto absolute bottom-24 right-4 z-[890] btn btn-circle bg-base-100 text-base-content shadow-lg transition-[right] duration-300"
+        >
+            <x-mary-icon name="o-square-3-stack-3d" class="h-6 w-6" />
+        </button>
 
-            <div class="join pointer-events-auto z-[900] mb-2 shadow-lg lg:absolute lg:bottom-6 lg:left-1/2 lg:mb-0 lg:-translate-x-1/2">
-                <button type="button" data-floor-btn="0" onclick="UbicaTecMap.setFloor(0)" class="join-item btn btn-sm sm:btn-md">
-                    Exterior
-                </button>
-                <button type="button" data-floor-btn="1" onclick="UbicaTecMap.setFloor(1)" class="join-item btn btn-sm sm:btn-md">
-                    1º
-                </button>
-                <button type="button" data-floor-btn="2" onclick="UbicaTecMap.setFloor(2)" class="join-item btn btn-sm sm:btn-md">
-                    2º
-                </button>
-            </div>
+        {{-- Los pisos emergen a la izquierda del botón de capas --}}
+        <div
+            class="join pointer-events-auto absolute bottom-[6.5rem] right-[4.5rem] z-[890] shadow-lg transition-[right] duration-300 lg:bottom-24"
+            :class="(floorsOpen ? '' : 'hidden') + ' ' + ((building || infoOpen) ? 'lg:right-[29rem]' : 'lg:right-20')"
+        >
+            <button type="button" data-floor-btn="0" onclick="UbicaTecMap.setFloor(0)" @click="floorsOpen = false" class="join-item btn btn-sm sm:btn-md">
+                Exterior
+            </button>
+            <button type="button" data-floor-btn="1" onclick="UbicaTecMap.setFloor(1)" @click="floorsOpen = false" class="join-item btn btn-sm sm:btn-md">
+                1º
+            </button>
+            <button type="button" data-floor-btn="2" onclick="UbicaTecMap.setFloor(2)" @click="floorsOpen = false" class="join-item btn btn-sm sm:btn-md">
+                2º
+            </button>
+        </div>
+
+        {{-- Selector de piso + bottom-sheet (sobre los botones flotantes en móvil) --}}
+        <div
+            class="pointer-events-none absolute inset-x-0 bottom-0 z-[960] flex flex-col items-center lg:contents {{ $location ? '' : 'pb-4 sm:pb-6' }}"
+            :class="building ? '!pb-0' : ''"
+        >
 
             @if ($location)
                 <div
-                    x-data="{ open: true }"
-                    :class="{ 'lg:flex': open, 'lg:hidden': !open }"
-                    class="pointer-events-auto z-[900] w-full lg:absolute lg:left-4 lg:top-4 lg:max-h-[70vh] lg:w-96 lg:flex-col lg:overflow-hidden lg:rounded-box lg:border lg:border-base-300 lg:bg-base-100 lg:shadow-2xl"
+                    x-data="{ ty0: null, full: false }"
+                    x-show="!building"
+                    @touchstart.passive="ty0 = $event.touches[0].clientY"
+                    @touchend="if (ty0 !== null) { const dy = $event.changedTouches[0].clientY - ty0; if (dy > 40 && (!infoOpen || $refs.infoBody.scrollTop < 5)) { if (full) { full = false } else { infoOpen = false } } else if (dy < -40) { if (infoOpen) { full = true } else { infoOpen = true } } } ty0 = null"
+                    :class="{ 'lg:flex': infoOpen, 'lg:hidden': !infoOpen }"
+                    class="pointer-events-auto z-[960] w-full lg:absolute lg:inset-y-0 lg:right-0 lg:w-96 lg:animate-[panel-lateral_0.3s_ease-out] lg:flex-col lg:overflow-hidden lg:border-l lg:border-base-300 lg:bg-base-100 lg:shadow-2xl"
                 >
                     {{-- Cerrar (solo desktop, patrón tarjeta lateral) --}}
                     <button
                         type="button"
-                        @click="open = false"
+                        @click="infoOpen = false"
                         aria-label="Cerrar información"
                         class="btn btn-circle btn-ghost btn-xs absolute right-2 top-2 z-10 hidden lg:flex"
                     >
                         <x-mary-icon name="o-x-mark" class="h-4 w-4" />
                     </button>
 
-                    {{-- Barra para colapsar (solo móvil) --}}
+                    {{-- Asa de arrastre (solo móvil): desliza abajo/arriba o toca para alternar --}}
                     <button
                         type="button"
-                        @click="open = !open"
-                        class="flex w-full items-center justify-center gap-1 border-t border-base-300 bg-base-100 py-1.5 text-xs opacity-70 lg:hidden"
+                        @click="full = false; infoOpen = !infoOpen"
+                        aria-label="Mostrar u ocultar información del lugar"
+                        class="flex w-full items-center justify-center border-t border-base-300 bg-base-100 py-2.5 lg:hidden"
                     >
-                        <span x-show="open">Ocultar ▾</span>
-                        <span x-show="!open" x-cloak>Ver información del lugar ▴</span>
+                        <span class="h-1 w-10 rounded-full bg-base-300"></span>
                     </button>
 
                     <div
-                        x-show="open"
+                        x-show="infoOpen"
                         x-cloak
-                        class="max-h-[42dvh] overflow-y-auto border-t border-base-300 bg-base-100 px-4 pb-5 pt-3 shadow-2xl lg:max-h-none lg:flex-1 lg:border-t-0 lg:pr-8 lg:pt-9 lg:shadow-none"
+                        x-ref="infoBody"
+                        :class="full ? 'max-lg:max-h-[calc(100dvh-3.5rem)] max-lg:min-h-[calc(100dvh-3.5rem)]' : 'max-lg:max-h-[42dvh]'"
+                        class="overflow-y-auto border-t border-base-300 bg-base-100 px-4 pb-5 pt-3 shadow-2xl transition-[max-height,min-height] duration-300 lg:max-h-none lg:flex-1 lg:border-t-0 lg:pr-8 lg:pt-9 lg:shadow-none"
                     >
                         <div class="flex items-start gap-3">
                             @if ($location->image)
@@ -202,9 +233,111 @@
                                 @endif
                             </div>
                         @endif
+
+                        @if ($spaces->isNotEmpty())
+                            <div class="mt-4">
+                                <p class="text-sm font-semibold opacity-70">¿Qué hay en este edificio?</p>
+                                <div class="mt-2 grid gap-1">
+                                    @foreach ($spaces as $space)
+                                        <a
+                                            href="{{ route('map', $space->slug) }}"
+                                            class="flex items-center justify-between gap-3 rounded-lg border border-base-200 px-3 py-2 hover:bg-base-200 active:bg-base-300"
+                                        >
+                                            <span class="text-sm">{{ $space->name }}</span>
+                                            <span class="badge badge-ghost badge-sm shrink-0">Piso {{ $space->floor }}</span>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             @endif
+
+            {{-- Sheet de edificio (click en el mapa): sube/baja sin recargar, estilo Google --}}
+            <div
+                x-cloak
+                x-show="building"
+                x-data="{ ty0: null, full: false }"
+                @touchstart.passive="ty0 = $event.touches[0].clientY"
+                @touchend="if (ty0 !== null) { const dy = $event.changedTouches[0].clientY - ty0; if (dy > 40 && $refs.buildingBody.scrollTop < 5) { if (full) { full = false } else { building = null } } else if (dy < -40) { full = true } } ty0 = null"
+                x-on:ubicatec-building.window="building = $event.detail; full = false"
+                x-transition:enter="transition-transform ease-out duration-300"
+                x-transition:enter-start="translate-y-full lg:translate-y-0 lg:translate-x-full"
+                x-transition:enter-end="translate-y-0 lg:translate-x-0"
+                x-transition:leave="transition-transform ease-in duration-200"
+                x-transition:leave-start="translate-y-0 lg:translate-x-0"
+                x-transition:leave-end="translate-y-full lg:translate-y-0 lg:translate-x-full"
+                class="pointer-events-auto relative z-[965] w-full lg:absolute lg:inset-y-0 lg:right-0 lg:flex lg:w-96 lg:flex-col lg:overflow-hidden lg:border-l lg:border-base-300 lg:bg-base-100 lg:shadow-2xl"
+            >
+                {{-- Cerrar (solo desktop) --}}
+                <button
+                    type="button"
+                    @click="building = null"
+                    aria-label="Cerrar información"
+                    class="btn btn-circle btn-ghost btn-xs absolute right-2 top-2 z-10 hidden lg:flex"
+                >
+                    <x-mary-icon name="o-x-mark" class="h-4 w-4" />
+                </button>
+
+                {{-- Asa de arrastre (solo móvil): desliza hacia abajo o toca para cerrar --}}
+                <button
+                    type="button"
+                    @click="building = null"
+                    aria-label="Cerrar información"
+                    class="flex w-full items-center justify-center border-t border-base-300 bg-base-100 py-2.5 lg:hidden"
+                >
+                    <span class="h-1 w-10 rounded-full bg-base-300"></span>
+                </button>
+
+                <div
+                    x-ref="buildingBody"
+                    :class="full ? 'max-lg:max-h-[calc(100dvh-3.5rem)] max-lg:min-h-[calc(100dvh-3.5rem)]' : 'max-lg:max-h-[42dvh]'"
+                    class="overflow-y-auto border-t border-base-300 bg-base-100 px-4 pb-5 pt-3 shadow-2xl transition-[max-height,min-height] duration-300 lg:max-h-none lg:flex-1 lg:border-t-0 lg:pr-8 lg:pt-9 lg:shadow-none"
+                >
+                    <div class="flex items-start gap-3">
+                        <template x-if="building?.image">
+                            <img :src="building.image" :alt="building.name" class="h-16 w-16 shrink-0 rounded-lg object-cover">
+                        </template>
+                        <div class="min-w-0">
+                            <h2 class="text-lg font-bold leading-tight" x-text="building?.name"></h2>
+                            <p class="mt-1 text-sm opacity-70" x-show="building?.description" x-text="building?.description"></p>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <template x-if="building?.phone">
+                            <a :href="'tel:' + building.phone" class="btn btn-sm btn-outline">📞 <span x-text="building.phone"></span></a>
+                        </template>
+                        <template x-if="building?.email">
+                            <a :href="'mailto:' + building.email" class="btn btn-sm btn-outline">✉️ Correo</a>
+                        </template>
+                        <template x-if="building?.website">
+                            <a :href="building.website" target="_blank" rel="noopener" class="btn btn-sm btn-outline">🌐 Sitio web</a>
+                        </template>
+                        <template x-if="building?.facebook">
+                            <a :href="building.facebook" target="_blank" rel="noopener" class="btn btn-sm btn-outline">📘 Facebook</a>
+                        </template>
+                    </div>
+
+                    <template x-if="building?.spaces?.length">
+                        <div class="mt-4">
+                            <p class="text-sm font-semibold opacity-70">¿Qué hay en este edificio?</p>
+                            <div class="mt-2 grid gap-1">
+                                <template x-for="space in building.spaces" :key="space.url">
+                                    <a
+                                        :href="space.url"
+                                        class="flex items-center justify-between gap-3 rounded-lg border border-base-200 px-3 py-2 hover:bg-base-200 active:bg-base-300"
+                                    >
+                                        <span class="text-sm" x-text="space.name"></span>
+                                        <span class="badge badge-ghost badge-sm shrink-0" x-text="'Piso ' + space.floor"></span>
+                                    </a>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -226,6 +359,7 @@
             </button>
             <div class="min-w-0 flex-1" x-ref="searchInput" wire:key="sheet-buscador">
                 <x-mary-input
+                    id="buscador-sheet"
                     wire:model.live.debounce.300ms="search"
                     placeholder="¿A dónde vamos a ir?"
                     icon="o-magnifying-glass"
@@ -301,6 +435,10 @@
     .ubicatec-zoom-close .ubicatec-label-room { font-size: 10px; }
     .ubicatec-zoom-closest .ubicatec-label-room { font-size: 13px; }
     .ubicatec-zoom-closest .ubicatec-label-building { font-size: 15px; }
+    /* En celular sobran los botones de zoom: se hace pinch. */
+    @media (max-width: 1023.98px) {
+        .leaflet-control-zoom { display: none !important; }
+    }
 </style>
 
 <script>
@@ -311,6 +449,7 @@
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 22,
+            maxNativeZoom: 19, // OSM solo sirve tiles hasta z19; de ahí en adelante Leaflet escala el z19
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
@@ -357,6 +496,15 @@
                         permanent: true,
                         direction: 'center',
                         className: 'ubicatec-polygon-label ' + tier,
+                    });
+                }
+
+                // Solo piso 0 es clickeable: los cuartos ya muestran su nombre y su
+                // detalle se llega por búsqueda. El click abre el sheet de edificio.
+                const info = floor === 0 && name ? payload.floor0Info[name] : null;
+                if (info) {
+                    layer.on('click', function () {
+                        window.dispatchEvent(new CustomEvent('ubicatec-building', { detail: info }));
                     });
                 }
             };
